@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
+import java.awt.Graphics;
+import java.awt.Graphics2D; // child of graphics
 
 public class GamePanel extends JPanel implements Runnable{
     
@@ -41,10 +43,38 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
 
+    // update and draw - game loop essentials
+    public void screenUpdate(){
+
+    }
+    public void paintComponent(Graphics graphics){
+        super.paintComponent(graphics);
+
+        // change graphics to a Graphics2D object - "upgrades functionality" for geometry, transformation, colors, text layout
+        Graphics2D testObj = (Graphics2D)graphics;
+
+        // create a tester polygon
+
+        testObj.setPaint(Color.pink);
+        
+        int[] xPts = {100, 120, 140};
+        int[] yPts = {200, 170, 200};
+
+        testObj.fillPolygon(xPts, yPts, 3);
+
+        testObj.dispose(); // release system resources being used
+    }
+
+
+
     // GAME LOOP
     public void run() {
         while(thread != null){
-            System.out.println("WORKING!");
+            // System.out.println("WORKING!");
+
+            screenUpdate();
+
+            repaint(); // calls paintComponent method
         }
     }
 
