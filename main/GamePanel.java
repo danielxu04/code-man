@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Runnable{
     
     /*************** SCREEN SETTINGS *****************/ 
 
@@ -16,6 +16,11 @@ public class GamePanel extends JPanel {
     // dimensions of screen (px)
     final int screenX = tileDimension*colTiles;
     final int screenY = tileDimension*rowTiles;
+    
+
+    /*************** Instantiate *****************/ 
+
+    Thread thread;  // executed by a thread - start-stop functionality 
 
 
 
@@ -26,6 +31,19 @@ public class GamePanel extends JPanel {
         this.setPreferredSize(new Dimension(screenX, screenY)); // set screen dimensions
         this.setBackground(Color.black); // set background color to black
 
+    }
+
+
+    // start the thread - automatically calls run method which will contain game loop
+    public void threadStart() {
+        thread = new Thread(this);
+        thread.start();
+    }
+
+
+    @Override
+    public void run() {
+        
     }
 
 
