@@ -21,6 +21,10 @@ public class Main {
         // sizes frame to preferred size
         gameWindow.pack();
 
+        // start the gameloop
+        gamePanel.threadStart();
+
+
 
 
 

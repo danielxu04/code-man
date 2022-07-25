@@ -41,9 +41,11 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
 
-    @Override
+    // GAME LOOP
     public void run() {
-        
+        while(thread != null){
+            System.out.println("WORKING!");
+        }
     }
 
 
