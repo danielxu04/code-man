@@ -18,11 +18,20 @@ public class GamePanel extends JPanel implements Runnable{
     // dimensions of screen (px)
     final int screenX = tileDimension*colTiles;
     final int screenY = tileDimension*rowTiles;
+
+
+    /*************** PLAYER SETTINGS *****************/ 
+
+    int x = 80;
+    int y = 80;
+
+    int speed = 5;
     
 
     /*************** Instantiate *****************/ 
 
     Thread thread;  // executed by a thread - start-stop functionality 
+    KeyboardInput keyIn = new KeyboardInput(); // keyboard input object
 
 
 
@@ -32,6 +41,8 @@ public class GamePanel extends JPanel implements Runnable{
         
         this.setPreferredSize(new Dimension(screenX, screenY)); // set screen dimensions
         this.setBackground(Color.black); // set background color to black
+        this.addKeyListener(keyIn); // add our key listener object to game panel
+        this.setFocusable(true); // game panel focused to receive key input
 
     }
 
@@ -46,6 +57,18 @@ public class GamePanel extends JPanel implements Runnable{
     // update and draw - game loop essentials
     public void screenUpdate(){
 
+        if(keyIn.up == true){
+            y -= speed;
+        }
+        else if(keyIn.left == true){
+            x -= speed;
+        }
+        else if(keyIn.down == true){
+            y += speed;
+        }
+        else if(keyIn.right == true){
+            x += speed;
+        }
     }
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
@@ -53,14 +76,11 @@ public class GamePanel extends JPanel implements Runnable{
         // change graphics to a Graphics2D object - "upgrades functionality" for geometry, transformation, colors, text layout
         Graphics2D testObj = (Graphics2D)graphics;
 
-        // create a tester polygon
+        // create a tester rectangle
 
         testObj.setPaint(Color.pink);
         
-        int[] xPts = {100, 120, 140};
-        int[] yPts = {200, 170, 200};
-
-        testObj.fillPolygon(xPts, yPts, 3);
+        testObj.fillRect(x, y, tileDimension, tileDimension*2);
 
         testObj.dispose(); // release system resources being used
     }
