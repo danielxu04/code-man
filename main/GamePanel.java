@@ -28,6 +28,19 @@ public class GamePanel extends JPanel implements Runnable{
     int speed = 5;
     
 
+    /*************** GAME LOOP *****************/ 
+
+    int nsFactor = 1000000000; // 1s = 10^9ns
+    int fpsCap = 60; // cap our fps at 60
+
+    double timeSpan = nsFactor/fpsCap; // # of time required for each frame
+    long lastTime;
+    long curTime;
+    long timePassed;
+    double delta = 0;
+    
+
+
     /*************** Instantiate *****************/ 
 
     Thread thread;  // executed by a thread - start-stop functionality 
@@ -43,6 +56,8 @@ public class GamePanel extends JPanel implements Runnable{
         this.setBackground(Color.black); // set background color to black
         this.addKeyListener(keyIn); // add our key listener object to game panel
         this.setFocusable(true); // game panel focused to receive key input
+
+        this.setDoubleBuffered(true); // improves rendering performance
 
     }
 
@@ -71,6 +86,7 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
     public void paintComponent(Graphics graphics){
+
         super.paintComponent(graphics);
 
         // change graphics to a Graphics2D object - "upgrades functionality" for geometry, transformation, colors, text layout
@@ -91,10 +107,23 @@ public class GamePanel extends JPanel implements Runnable{
     public void run() {
         while(thread != null){
             // System.out.println("WORKING!");
+        
+            curTime = System.nanoTime(); // express current time in nanoseconds
+            
+            timePassed = curTime - lastTime; // difference between current time and last updated time = time passed
 
-            screenUpdate();
+            delta += (timePassed / timeSpan); // add timePassed divided by time interval to delta (most times time passed will be less than time interval allotted)
 
-            repaint(); // calls paintComponent method
+            lastTime = curTime; // update lastTime with the current time
+
+            // once delta reaches 1, in other words, when timePassed is equal to timeSpan (time interval)
+            // update the screen, paint the screen
+            if(delta >= 1){
+                screenUpdate();
+                repaint(); // calls paintComponent method
+                delta = 0; // set delta back to 0 so we can repeat this process
+            }
+            
         }
     }
 

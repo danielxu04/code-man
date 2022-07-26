@@ -4,7 +4,7 @@ import java.awt.event.KeyListener;
 public class KeyboardInput implements KeyListener{
 
     // int var to store ascii codes of pressed keys
-    public int ascii;
+    // public int ascii;
     // booleans to verify when a key is pressed/released
     public boolean up, down, right, left;
 
@@ -17,7 +17,7 @@ public class KeyboardInput implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         
-        ascii = e.getKeyCode();
+        int ascii = e.getKeyCode();
 
         if(ascii == KeyEvent.VK_W){
             up = true;
@@ -36,6 +36,8 @@ public class KeyboardInput implements KeyListener{
     
     @Override // check to see when wasd is released
     public void keyReleased(KeyEvent e) {
+
+        int ascii = e.getKeyCode();
 
         if(ascii == KeyEvent.VK_W){
             up = false;
