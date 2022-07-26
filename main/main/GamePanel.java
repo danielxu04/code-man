@@ -1,8 +1,12 @@
+package main;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D; // child of graphics
+
+import figures.Character;
 
 public class GamePanel extends JPanel implements Runnable{
     
@@ -22,13 +26,13 @@ public class GamePanel extends JPanel implements Runnable{
 
     /*************** PLAYER SETTINGS *****************/ 
 
-    int x = 80;
-    int y = 80;
+    int xPt = 80;
+    int yPt = 80;
 
     int speed = 5;
     
 
-    /*************** GAME LOOP *****************/ 
+    /*************** GAME LOOP VARIABLES *****************/ 
 
     int nsFactor = 1000000000; // 1s = 10^9ns
     int fpsCap = 60; // cap our fps at 60
@@ -41,10 +45,11 @@ public class GamePanel extends JPanel implements Runnable{
     
 
 
-    /*************** Instantiate *****************/ 
+    /*************** Instantiations *****************/ 
 
     Thread thread;  // executed by a thread - start-stop functionality 
     KeyboardInput keyIn = new KeyboardInput(); // keyboard input object
+    Character mainCharacter = new Character(this, keyIn); // instantiate Character, parameters are this gamePanel object and keyIn KeyboardInput object
 
 
 
@@ -73,16 +78,16 @@ public class GamePanel extends JPanel implements Runnable{
     public void screenUpdate(){
 
         if(keyIn.up == true){
-            y -= speed;
+            yPt -= speed;
         }
         else if(keyIn.left == true){
-            x -= speed;
+            xPt -= speed;
         }
         else if(keyIn.down == true){
-            y += speed;
+            yPt += speed;
         }
         else if(keyIn.right == true){
-            x += speed;
+            xPt += speed;
         }
     }
     public void paintComponent(Graphics graphics){
@@ -96,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         testObj.setPaint(Color.pink);
         
-        testObj.fillRect(x, y, tileDimension, tileDimension*2);
+        testObj.fillRect(xPt, yPt, tileDimension, tileDimension*2);
 
         testObj.dispose(); // release system resources being used
     }
