@@ -1,4 +1,6 @@
-package main;
+package mainfiles;
+
+import figures.Character;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,14 +8,12 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D; // child of graphics
 
-import figures.Character;
-
 public class GamePanel extends JPanel implements Runnable{
     
     /*************** SCREEN SETTINGS *****************/ 
 
     // tile size (px)
-    final int tileDimension = 48;
+    public final int tileDimension = 48;
 
     // grid 21 x 15 (tile)
     final int colTiles = 21;
@@ -23,14 +23,6 @@ public class GamePanel extends JPanel implements Runnable{
     final int screenX = tileDimension*colTiles;
     final int screenY = tileDimension*rowTiles;
 
-
-    /*************** PLAYER SETTINGS *****************/ 
-
-    int xPt = 80;
-    int yPt = 80;
-
-    int speed = 5;
-    
 
     /*************** GAME LOOP VARIABLES *****************/ 
 
@@ -43,8 +35,6 @@ public class GamePanel extends JPanel implements Runnable{
     long timePassed;
     double delta = 0;
     
-
-
     /*************** Instantiations *****************/ 
 
     Thread thread;  // executed by a thread - start-stop functionality 
@@ -74,40 +64,6 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
 
-    // update and draw - game loop essentials
-    public void screenUpdate(){
-
-        if(keyIn.up == true){
-            yPt -= speed;
-        }
-        else if(keyIn.left == true){
-            xPt -= speed;
-        }
-        else if(keyIn.down == true){
-            yPt += speed;
-        }
-        else if(keyIn.right == true){
-            xPt += speed;
-        }
-    }
-    public void paintComponent(Graphics graphics){
-
-        super.paintComponent(graphics);
-
-        // change graphics to a Graphics2D object - "upgrades functionality" for geometry, transformation, colors, text layout
-        Graphics2D testObj = (Graphics2D)graphics;
-
-        // create a tester rectangle
-
-        testObj.setPaint(Color.pink);
-        
-        testObj.fillRect(xPt, yPt, tileDimension, tileDimension*2);
-
-        testObj.dispose(); // release system resources being used
-    }
-
-
-
     // GAME LOOP
     public void run() {
         while(thread != null){
@@ -132,5 +88,24 @@ public class GamePanel extends JPanel implements Runnable{
         }
     }
 
+
+    // update and draw - game loop essentials
+    public void screenUpdate(){
+
+        mainCharacter.movement();
+
+    }
+    
+    public void paintComponent(Graphics graphics){
+
+        super.paintComponent(graphics);
+
+        // change graphics to a Graphics2D object - "upgrades functionality" for geometry, transformation, colors, text layout
+        Graphics2D testObj = (Graphics2D)graphics;
+
+        mainCharacter.draw(testObj);
+
+        testObj.dispose(); // release system resources being used
+    }
 
 }

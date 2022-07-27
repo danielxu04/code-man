@@ -1,6 +1,7 @@
-package main;
+package mainfiles;
 
 import javax.swing.JFrame;
+
 
 public class Main {
     
@@ -8,7 +9,8 @@ public class Main {
 
         // create a JFrame object
         JFrame gameWindow = new JFrame();
-        // construct gamePanel object 
+
+        // construct gamePanel object
         GamePanel gamePanel = new GamePanel();
 
 
