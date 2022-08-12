@@ -10,7 +10,8 @@ import java.awt.Graphics2D; // child of graphics
 
 public class GamePanel extends JPanel implements Runnable{
     
-    /*************** SCREEN SETTINGS *****************/ 
+
+	/*************** SCREEN SETTINGS *****************/ 
 
     // tile size (px)
     public final int tileDimension = 48;
@@ -64,6 +65,28 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
 
+    // update and draw - game loop essentials
+    public void screenUpdate(){
+
+    	// call movement method to maincharacter and update player movement
+        mainCharacter.movement();
+
+    }
+    
+    public void paintComponent(Graphics graphics){
+
+        super.paintComponent(graphics);
+
+        // change graphics to a Graphics2D object - "upgrades functionality" for geometry, transformation, colors, text layout
+        Graphics2D graphics2d = (Graphics2D)graphics;
+
+        // call the display method of mainCharacter - draws main character
+        mainCharacter.display(graphics2d);
+
+        graphics2d.dispose(); // release system resources being used
+    }
+
+
     // GAME LOOP
     public void run() {
         while(thread != null){
@@ -86,26 +109,6 @@ public class GamePanel extends JPanel implements Runnable{
             }
             
         }
-    }
-
-
-    // update and draw - game loop essentials
-    public void screenUpdate(){
-
-        mainCharacter.movement();
-
-    }
-    
-    public void paintComponent(Graphics graphics){
-
-        super.paintComponent(graphics);
-
-        // change graphics to a Graphics2D object - "upgrades functionality" for geometry, transformation, colors, text layout
-        Graphics2D testObj = (Graphics2D)graphics;
-
-        mainCharacter.draw(testObj);
-
-        testObj.dispose(); // release system resources being used
     }
 
 }
