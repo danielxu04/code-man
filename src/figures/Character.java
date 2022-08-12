@@ -23,7 +23,7 @@ public class Character extends Figure{
         this.movementDirection = 'u';
         this.xPt = 150;
         this.yPt = 150;
-        this.sp = 5;
+        this.sp = 3;
         getCharacterImg();
     }
     
@@ -54,6 +54,8 @@ public class Character extends Figure{
     // updates movementDirection of character
     public void movement(){
     	
+    	// increment spriteLooper
+    	spriteLooper++;
 
         if(keyIn.up == true){
         	movementDirection = 'u';
@@ -71,6 +73,21 @@ public class Character extends Figure{
         	movementDirection = 'r';
             xPt += sp;
         }
+        
+        
+        // if movement is called more than 12 times, change true -> false OR false -> true
+        if(spriteLooper > 12) {
+        	if(spriteDisplay) {
+        		spriteDisplay = false;
+        	}
+        	else {
+        		spriteDisplay = true;
+        	}
+        	
+        	// reset the counter
+        	spriteLooper = 0;
+        }
+        
     }
 
     
@@ -80,18 +97,41 @@ public class Character extends Figure{
     	BufferedImage characterImg = null;
     	
     	// display a certain sprite image depending on key pressed/movement direction
+    	
+    	// if boolean variable spriteDisplay is true, display first sprite image; if false, display second sprite image (this will loop)
     	switch(movementDirection) {
     	case 'u':
-    		characterImg = b1;
+    		if(spriteDisplay) {
+    			characterImg = b1;
+    		}
+    		else {
+    			characterImg = b2;
+    		}
     		break;
     	case 'l':
-    		characterImg = l1;
+    		if(spriteDisplay) {
+    			characterImg = l1;
+    		}
+    		else {
+    			characterImg = l2;
+    		}
     		break;
     	case 'd':
-    		characterImg = f1;
+    		if(spriteDisplay) {
+    			characterImg = f1;
+    		}
+    		else {
+    			characterImg = f2;
+    		}
     		break;
     	case 'r':
-    		characterImg = r1;
+    		if(spriteDisplay) {
+        		characterImg = r1;
+    		}
+    		else {
+        		characterImg = r2;
+    		}
+
     		break;
     	}
     	
