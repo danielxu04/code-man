@@ -1,6 +1,7 @@
 package mainfiles;
 
 import figures.Character;
+import gametiles.GameTileController;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,12 +18,12 @@ public class GamePanel extends JPanel implements Runnable{
     public final int tileDimension = 48;
 
     // grid 21 x 15 (tile)
-    final int colTiles = 21;
-    final int rowTiles = 15;
+    public final int colTiles = 21;
+    public final int rowTiles = 15;
 
     // dimensions of screen (px)
-    final int screenX = tileDimension*colTiles;
-    final int screenY = tileDimension*rowTiles;
+    public final int screenX = tileDimension*colTiles;
+    public final int screenY = tileDimension*rowTiles;
 
 
     /*************** GAME LOOP VARIABLES *****************/ 
@@ -41,6 +42,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread thread;  // executed by a thread - start-stop functionality 
     KeyboardInput keyIn = new KeyboardInput(); // keyboard input object
     Character mainCharacter = new Character(this, keyIn); // instantiate Character, parameters are this gamePanel object and keyIn KeyboardInput object
+    GameTileController controller = new GameTileController(this); // instantiate GameTileController, parameter is this gamePanel object - will draw the gameTiles
 
 
 
@@ -79,9 +81,13 @@ public class GamePanel extends JPanel implements Runnable{
 
         // change graphics to a Graphics2D object - "upgrades functionality" for geometry, transformation, colors, text layout
         Graphics2D graphics2d = (Graphics2D)graphics;
-
+        
+        // draw tiles before player so that tiles are underneath player
+        controller.display(graphics2d);
+        
         // call the display method of mainCharacter - draws main character
         mainCharacter.display(graphics2d);
+
 
         graphics2d.dispose(); // release system resources being used
     }
