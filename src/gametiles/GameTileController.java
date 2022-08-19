@@ -19,20 +19,26 @@ public class GameTileController {
 	ArrayList<GameTile> tileList = new ArrayList<GameTile>();
 	
 	// to store max size of gamePanel
-	int maxCol = gamePanel.colTiles;
-	int maxRow = gamePanel.rowTiles;
-	int tileSize = gamePanel.tileDimension;
+	int maxCol;
+	int maxRow;
+	int tileSize;
 	
-	// map
-	int mapMatrix[][] = new int[maxCol][maxRow];
+	// map variables
+	int mapMatrix[][];
 	
 	
 	// gameTileController constructor
 	public GameTileController(GamePanel gamePanel) {
 		
 		this.gamePanel = gamePanel;
+		this.mapMatrix = new int[gamePanel.colTiles][gamePanel.rowTiles];
+		this.maxCol = gamePanel.colTiles;
+		this.maxRow = gamePanel.rowTiles;
+		this.tileSize = gamePanel.tileDimension;
 		
 		getTileImg();
+		
+		mapLoader();
 		
 	}
 	
@@ -71,33 +77,16 @@ public class GameTileController {
 			// read text file
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
-			/*
-			int c= 0, r = 0;
-			
-			while(c < maxCol && r < maxRow) {
-				
-				String rowRender = br.readLine();
-				
-				for(; c < maxCol; c++) {
-					
-					String tileIndex[] = rowRender.split(" ");
-					
-					int currTile = Integer.parseInt(tileIndex[c]);
-					
-					mapMatrix[c][r] = currTile;
-				}
-				
-				if(c == maxCol) {
-					c = 0;
-					r++;
-				}
-			}
-			*/
+			//System.out.println("loading");
 			
 			
+			// loop until we have reached max rows
 			for(int r = 0, c = 0; r < maxRow;) {
+				
+				// render the entire row
 				String rowRender = br.readLine();
 				
+				// for the row, iterate through each column, store each tile index into the matrix
 				for(; c < maxCol; c++) {
 					
 					String tileIndex[] = rowRender.split(" ");
@@ -106,13 +95,15 @@ public class GameTileController {
 					
 					mapMatrix[c][r] = currTile;
 				}
-				
-				if(c == maxCol) {
+				// if column counter is larger or equal to the max columns, reset column to 0 and increment row counter
+				if(c >= maxCol) {
 					c = 0;
 					r++;
 				}
-			}
+			} 
 			
+			
+			// System.out.println("loaded: " + mapMatrix[14][13]);
 		}catch(Exception e){
 			
 		}
@@ -120,8 +111,41 @@ public class GameTileController {
 	// display tile
 	public void display(Graphics2D g2D) {
 		
+		int col = 0, row = 0, x = 0, y = 0;
+		
 		// draw first tile in top left corner
-		g2D.drawImage(tileList.get(0).tileImage, 0, 0, tileSize, tileSize, null);	
+		//g2D.drawImage(tileList.get(0).tileImage, 0, 0, tileSize, tileSize, null);	
+		
+		// while map isnt fully drawn
+		while(col < maxCol && row < maxRow) {
+			
+			//System.out.println("Displaying");
+			
+			// access current tile index
+			int currTile = mapMatrix[col][row];
+			
+			//System.out.println(tileList.get(currTile));
+			
+			// draw the tileImage of the current tile at its position
+			g2D.drawImage(tileList.get(currTile).tileImage, x, y, tileSize, tileSize, null);
+			// move to next column
+			col++;			
+			// increase x position by the size of a tile (ensures no spaces in between tiles)
+			x += tileSize;
+
+			// if we have reached the rightmost side of the map
+			if(col == maxCol) {
+				// increase our y value (move down) by the tilesize (48)
+				y += tileSize;
+				// reset our x value, our position back at leftmost side of map
+				x = 0;
+				// reset our col index value
+				col = 0;
+				// increment our row index value
+				row++;	
+			}
+			
+		}
 	}
 	
 	
