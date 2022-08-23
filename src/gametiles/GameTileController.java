@@ -51,6 +51,9 @@ public class GameTileController {
 			tileList.add(new GameTile());
 			tileList.add(new GameTile());
 			tileList.add(new GameTile());
+			tileList.add(new GameTile());
+			tileList.add(new GameTile());
+			
 			
 			// FLOOR TILE			
 			tileList.get(0).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Floor.png"));
@@ -63,6 +66,12 @@ public class GameTileController {
 			
 			// WALL-2 (PURPLE) TILE
 			tileList.get(3).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Wall-2.png"));
+			
+			// TREE TILE
+			tileList.get(4).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Tree.png"));
+			
+			// BUSH TILE
+			tileList.get(5).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Bush.png"));
 			
 		} catch(IOException e) {
 			e.printStackTrace();

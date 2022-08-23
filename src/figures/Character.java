@@ -21,8 +21,8 @@ public class Character extends Figure{
         this.gamePanel = g;
         this.keyIn = k;
         this.movementDirection = 'u';
-        this.xPt = 150;
-        this.yPt = 150;
+        this.xPt = 480;
+        this.yPt = 144;
         this.sp = 3;
         getCharacterImg();
     }
