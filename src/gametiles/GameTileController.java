@@ -82,7 +82,7 @@ public class GameTileController {
 		
 		try {
 			// import text file
-			InputStream is = getClass().getResourceAsStream("/map/map1.txt");
+			InputStream is = getClass().getResourceAsStream("/map/map.txt");
 			// read text file
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			

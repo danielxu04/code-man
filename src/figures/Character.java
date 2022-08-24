@@ -16,6 +16,11 @@ public class Character extends Figure{
     GamePanel gamePanel;
     KeyboardInput keyIn;
 
+	// x and y positions of the player 
+	// this will differ from the screen dimensions because our camera centers the player in the middle of the screen
+	public int playerPosX;
+	public int playerPosY;
+
     // constructor for character
     public Character(GamePanel g, KeyboardInput k){
         this.gamePanel = g;
@@ -23,7 +28,11 @@ public class Character extends Figure{
         this.movementDirection = 'u';
         this.xPt = 480;
         this.yPt = 144;
-        this.sp = 3;
+        this.sp = 4;
+
+		// display player in center of the screen
+		this.playerPosX = gamePanel.screenX / 2 - gamePanel.tileDimension/2;
+		this.playerPosY = gamePanel.screenY / 2 - gamePanel.tileDimension/2;
         getCharacterImg();
     }
     
@@ -136,6 +145,6 @@ public class Character extends Figure{
     	}
     	
     	// draw image with respect to x, y values and gamePanel
-    	g2D.drawImage(characterImg, xPt, yPt, gamePanel.tileDimension, gamePanel.tileDimension, null);
+    	g2D.drawImage(characterImg, playerPosX, playerPosY, gamePanel.tileDimension, gamePanel.tileDimension, null);
     }
 }

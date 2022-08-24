@@ -37,6 +37,7 @@ public class GamePanel extends JPanel implements Runnable{
     long timePassed;
     double delta = 0;
     
+
     /*************** Instantiations *****************/ 
 
     Thread thread;  // executed by a thread - start-stop functionality 
