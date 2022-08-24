@@ -37,6 +37,12 @@ public class GamePanel extends JPanel implements Runnable{
     long timePassed;
     double delta = 0;
     
+    /*************** World *****************/ 
+
+    public int worldCols = 70; // 70 tile columns
+    public int worldRows = 60; // 60 tile rows
+    public int worldPixelHor = worldCols * 48; // convert horizontal tile size to px
+    public int worldPixelVert = worldRows * 48; // convert vertical tile size to px
 
     /*************** Instantiations *****************/ 
 

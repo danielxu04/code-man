@@ -19,9 +19,13 @@ public class GameTileController {
 	ArrayList<GameTile> tileList = new ArrayList<GameTile>();
 	
 	// to store max size of gamePanel
-	int maxCol;
-	int maxRow;
+	int screenCol;
+	int screenRow;
 	int tileSize;
+
+	// to store max size of world
+	int worldCol;
+	int worldRow;
 	
 	// map variables
 	int mapMatrix[][];
@@ -31,11 +35,21 @@ public class GameTileController {
 	public GameTileController(GamePanel gamePanel) {
 		
 		this.gamePanel = gamePanel;
-		this.mapMatrix = new int[gamePanel.colTiles][gamePanel.rowTiles];
-		this.maxCol = gamePanel.colTiles;
-		this.maxRow = gamePanel.rowTiles;
+
+		// resize map matrix to size of the world map
+		this.mapMatrix = new int[gamePanel.worldCols][gamePanel.worldRows];
+
+		// size of screen
+		this.screenCol = gamePanel.colTiles;
+		this.screenRow = gamePanel.rowTiles;
+
+		// size of world
+		this.worldCol = gamePanel.worldCols;
+		this.worldRow = gamePanel.worldRows;
+
+		// tile size
 		this.tileSize = gamePanel.tileDimension;
-		
+
 		getTileImg();
 		
 		mapLoader();
@@ -90,13 +104,13 @@ public class GameTileController {
 			
 			
 			// loop until we have reached max rows
-			for(int r = 0, c = 0; r < maxRow;) {
+			for(int r = 0, c = 0; r < worldRow;) {
 				
 				// render the entire row
 				String rowRender = br.readLine();
 				
 				// for the row, iterate through each column, store each tile index into the matrix
-				for(; c < maxCol; c++) {
+				for(; c < worldCol; c++) {
 					
 					String tileIndex[] = rowRender.split(" ");
 					
@@ -105,7 +119,7 @@ public class GameTileController {
 					mapMatrix[c][r] = currTile;
 				}
 				// if column counter is larger or equal to the max columns, reset column to 0 and increment row counter
-				if(c >= maxCol) {
+				if(c >= worldCol) {
 					c = 0;
 					r++;
 				}
@@ -126,7 +140,7 @@ public class GameTileController {
 		//g2D.drawImage(tileList.get(0).tileImage, 0, 0, tileSize, tileSize, null);	
 		
 		// while map isnt fully drawn
-		while(col < maxCol && row < maxRow) {
+		while(col < screenCol && row < screenRow) {
 			
 			//System.out.println("Displaying");
 			
@@ -143,7 +157,7 @@ public class GameTileController {
 			x += tileSize;
 
 			// if we have reached the rightmost side of the map
-			if(col == maxCol) {
+			if(col == screenCol) {
 				// increase our y value (move down) by the tilesize (48)
 				y += tileSize;
 				// reset our x value, our position back at leftmost side of map
