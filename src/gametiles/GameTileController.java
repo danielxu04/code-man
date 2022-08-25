@@ -92,20 +92,18 @@ public class GameTileController {
 		}
 	}
 	
+	// function to load the map
 	public void mapLoader() {
-		
 		try {
 			// import text file
-			InputStream is = getClass().getResourceAsStream("/map/map.txt");
+			InputStream is = getClass().getResourceAsStream("/map/worldmap.txt");
 			// read text file
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			
 			//System.out.println("loading");
 			
-			
 			// loop until we have reached max rows
 			for(int r = 0, c = 0; r < worldRow;) {
-				
 				// render the entire row
 				String rowRender = br.readLine();
 				
@@ -125,8 +123,8 @@ public class GameTileController {
 				}
 			} 
 			
+			//System.out.println("loaded: " + mapMatrix[69][59]);
 			
-			// System.out.println("loaded: " + mapMatrix[14][13]);
 		}catch(Exception e){
 			
 		}
@@ -134,40 +132,39 @@ public class GameTileController {
 	// display tile
 	public void display(Graphics2D g2D) {
 		
-		int col = 0, row = 0, x = 0, y = 0;
-		
-		// draw first tile in top left corner
-		//g2D.drawImage(tileList.get(0).tileImage, 0, 0, tileSize, tileSize, null);	
+		int col = 0, row = 0;
 		
 		// while map isnt fully drawn
-		while(col < screenCol && row < screenRow) {
+		while(col < worldCol && row < worldRow) {
 			
 			//System.out.println("Displaying");
 			
 			// access current tile index
 			int currTile = mapMatrix[col][row];
+
+			// CAMERA VARIABLES
+			// xy measurement by pixel
+			int mapX = col * tileSize;
+			int mapY = row * tileSize;
+			
+			// constantly changing map draw position, taking into account the player's position and offsetting the differences
+			int drawX = mapX - gamePanel.mainCharacter.xPt + gamePanel.mainCharacter.playerPosX;
+			int drawY = mapY - gamePanel.mainCharacter.yPt + gamePanel.mainCharacter.playerPosY;
 			
 			//System.out.println(tileList.get(currTile));
 			
 			// draw the tileImage of the current tile at its position
-			g2D.drawImage(tileList.get(currTile).tileImage, x, y, tileSize, tileSize, null);
+			g2D.drawImage(tileList.get(currTile).tileImage, drawX, drawY, tileSize, tileSize, null);
 			// move to next column
 			col++;			
-			// increase x position by the size of a tile (ensures no spaces in between tiles)
-			x += tileSize;
 
 			// if we have reached the rightmost side of the map
-			if(col == screenCol) {
-				// increase our y value (move down) by the tilesize (48)
-				y += tileSize;
-				// reset our x value, our position back at leftmost side of map
-				x = 0;
+			if(col == worldCol) {
 				// reset our col index value
 				col = 0;
 				// increment our row index value
 				row++;	
 			}
-			
 		}
 	}
 	

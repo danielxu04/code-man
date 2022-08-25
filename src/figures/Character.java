@@ -25,7 +25,7 @@ public class Character extends Figure{
     public Character(GamePanel g, KeyboardInput k){
         this.gamePanel = g;
         this.keyIn = k;
-        this.movementDirection = 'u';
+        this.movementDirection = 'd';
         this.xPt = 480;
         this.yPt = 144;
         this.sp = 4;

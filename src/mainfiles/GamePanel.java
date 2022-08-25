@@ -41,14 +41,14 @@ public class GamePanel extends JPanel implements Runnable{
 
     public int worldCols = 70; // 70 tile columns
     public int worldRows = 60; // 60 tile rows
-    public int worldPixelHor = worldCols * 48; // convert horizontal tile size to px
-    public int worldPixelVert = worldRows * 48; // convert vertical tile size to px
+    public int worldPixelHor = worldCols * tileDimension; // convert horizontal tile size to px
+    public int worldPixelVert = worldRows * tileDimension; // convert vertical tile size to px
 
     /*************** Instantiations *****************/ 
 
     Thread thread;  // executed by a thread - start-stop functionality 
     KeyboardInput keyIn = new KeyboardInput(); // keyboard input object
-    Character mainCharacter = new Character(this, keyIn); // instantiate Character, parameters are this gamePanel object and keyIn KeyboardInput object
+    public Character mainCharacter = new Character(this, keyIn); // instantiate Character, parameters are this gamePanel object and keyIn KeyboardInput object
     GameTileController controller = new GameTileController(this); // instantiate GameTileController, parameter is this gamePanel object - will draw the gameTiles
 
 
@@ -58,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
     public GamePanel(){
         
         this.setPreferredSize(new Dimension(screenX, screenY)); // set screen dimensions
-        this.setBackground(Color.pink); // set background color to black
+        this.setBackground(Color.black); // set background color to black
         this.addKeyListener(keyIn); // add our key listener object to game panel
         this.setFocusable(true); // game panel focused to receive key input
 
