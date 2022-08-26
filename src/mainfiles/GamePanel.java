@@ -5,6 +5,7 @@ import gametiles.GameTileController;
 
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D; // child of graphics
@@ -43,6 +44,11 @@ public class GamePanel extends JPanel implements Runnable{
     public int worldRows = 60; // 60 tile rows
     public int worldPixelHor = worldCols * tileDimension; // convert horizontal tile size to px
     public int worldPixelVert = worldRows * tileDimension; // convert vertical tile size to px
+    
+    /*************** FPS *****************/
+
+    public int frames; // temp variable used to display fps
+    public String fpsDisplay = frames + " FPS";
 
     /*************** Instantiations *****************/ 
 
@@ -50,9 +56,8 @@ public class GamePanel extends JPanel implements Runnable{
     KeyboardInput keyIn = new KeyboardInput(); // keyboard input object
     public Character mainCharacter = new Character(this, keyIn); // instantiate Character, parameters are this gamePanel object and keyIn KeyboardInput object
     GameTileController controller = new GameTileController(this); // instantiate GameTileController, parameter is this gamePanel object - will draw the gameTiles
-
-
-
+    Text fps = new Text(fpsDisplay, 20, 30);
+    
     /*************** GAME PANEL CONSTRUCTOR *****************/ 
 
     public GamePanel(){
@@ -61,7 +66,6 @@ public class GamePanel extends JPanel implements Runnable{
         this.setBackground(Color.black); // set background color to black
         this.addKeyListener(keyIn); // add our key listener object to game panel
         this.setFocusable(true); // game panel focused to receive key input
-
         this.setDoubleBuffered(true); // improves rendering performance
 
     }
@@ -94,7 +98,7 @@ public class GamePanel extends JPanel implements Runnable{
         
         // call the display method of mainCharacter - draws main character
         mainCharacter.display(graphics2d);
-
+        
 
         graphics2d.dispose(); // release system resources being used
     }
@@ -102,6 +106,12 @@ public class GamePanel extends JPanel implements Runnable{
 
     // GAME LOOP
     public void run() {
+
+        // FPS TRACKER
+        int framesCounter = 0; // count number of frames running every second
+
+        long seconds = System.nanoTime();
+
         while(thread != null){
             // System.out.println("WORKING!");
         
@@ -119,8 +129,18 @@ public class GamePanel extends JPanel implements Runnable{
                 screenUpdate();
                 repaint(); // calls paintComponent method
                 delta = 0; // set delta back to 0 so we can repeat this process
+                framesCounter++; // increment frames everytime we update the screen
             }
-            
+
+            // check to see if 1 second has passed
+            if ((System.nanoTime() - seconds) > Math.pow(10, 9)){
+                seconds += Math.pow(10, 9); // increase seconds by 1 second, so we maintain a 1s distance 
+                
+                frames = framesCounter;
+                System.out.println(frames + " FPS");
+                
+                framesCounter = 0; // reset frames
+            }
         }
     }
 
