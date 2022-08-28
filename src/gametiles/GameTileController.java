@@ -71,21 +71,27 @@ public class GameTileController {
 			
 			// FLOOR TILE			
 			tileList.get(0).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Floor.png"));
+			tileList.get(0).tileCollision = false;
 			
 			// CHEMICAL LIQUID TILE
 			tileList.get(1).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Chemical.png"));
+			tileList.get(1).tileCollision = false;
 			
 			// WALL-1 (RED) TILE
 			tileList.get(2).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Wall-1.png"));
+			tileList.get(2).tileCollision = true;
 			
 			// WALL-2 (PURPLE) TILE
 			tileList.get(3).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Wall-2.png"));
+			tileList.get(3).tileCollision = true;
 			
 			// TREE TILE
 			tileList.get(4).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Tree.png"));
+			tileList.get(4).tileCollision = true;
 			
 			// BUSH TILE
 			tileList.get(5).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Bush.png"));
+			tileList.get(5).tileCollision = false;
 			
 		} catch(IOException e) {
 			e.printStackTrace();
