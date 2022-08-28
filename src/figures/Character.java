@@ -63,32 +63,48 @@ public class Character extends Figure{
     	
     }
 
-    // a player method for movement - alters xy position of character
+    // a player method for movement - detects direction from keyboard input
     // updates movementDirection of character
     public void movement(){
-    	
-    	// increment spriteLooper
-    	spriteLooper++;
+
+		// increment spriteLooper
+		spriteLooper++;
 
         if(keyIn.up == true){
         	movementDirection = 'u';
-            yPt -= sp;
         }
         else if(keyIn.left == true){
         	movementDirection = 'l';
-            xPt -= sp;
         }
         else if(keyIn.down == true){
         	movementDirection = 'd';
-            yPt += sp;
         }
         else if(keyIn.right == true){
         	movementDirection = 'r';
-            xPt += sp;
         }
-        
-		isCollision = false;
+    
+
+		isCollision = false; 
 		gamePanel.collisionChecker.CollisionChecker(this); // pass this main character class into the collision checker method
+ 
+		// if no collision, allow character to move
+		if(isCollision == false){
+
+			switch(movementDirection){
+				case 'u':
+					yPt -= sp;
+					break;
+				case 'l':
+					xPt -= sp;
+					break;
+				case 'd':
+					yPt += sp;
+					break;
+				case 'r':
+					xPt += sp;
+					break;
+			}
+		}
 
 
         // if movement is called more than 12 times, change true -> false OR false -> true

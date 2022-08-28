@@ -16,7 +16,7 @@ public class GameTileController {
 	
 	// create an arraylist to store tiles 
 	// require resizable array - not sure how many tiles will be used
-	ArrayList<GameTile> tileList = new ArrayList<GameTile>();
+	public ArrayList<GameTile> tileList = new ArrayList<GameTile>();
 	
 	// to store max size of gamePanel
 	int screenCol;
@@ -28,7 +28,7 @@ public class GameTileController {
 	int worldRow;
 	
 	// map variables
-	int mapMatrix[][];
+	public int mapMatrix[][];
 	
 	
 	// gameTileController constructor
