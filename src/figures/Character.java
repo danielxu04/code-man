@@ -63,63 +63,67 @@ public class Character extends Figure{
     	
     }
 
-    // a player method for movement - detects direction from keyboard input
-    // updates movementDirection of character
+    // a player method for movement 
     public void movement(){
 
 		// increment spriteLooper
 		spriteLooper++;
 
-        if(keyIn.up == true){
-        	movementDirection = 'u';
-        }
-        else if(keyIn.left == true){
-        	movementDirection = 'l';
-        }
-        else if(keyIn.down == true){
-        	movementDirection = 'd';
-        }
-        else if(keyIn.right == true){
-        	movementDirection = 'r';
-        }
-    
+		// if wasd is pressed - this solves issue of automatically moving character
+		if(keyIn.up || keyIn.left || keyIn.down || keyIn.right){
 
-		isCollision = false; 
-		gamePanel.collisionChecker.CollisionChecker(this); // pass this main character class into the collision checker method
- 
-		// if no collision, allow character to move
-		if(isCollision == false){
-
-			switch(movementDirection){
-				case 'u':
-					yPt -= sp;
-					break;
-				case 'l':
-					xPt -= sp;
-					break;
-				case 'd':
-					yPt += sp;
-					break;
-				case 'r':
-					xPt += sp;
-					break;
+			// detects direction from keyboard input
+			// updates movementDirection of character
+			if(keyIn.up == true){
+				movementDirection = 'u';
 			}
+			else if(keyIn.left == true){
+				movementDirection = 'l';
+			}
+			else if(keyIn.down == true){
+				movementDirection = 'd';
+			}
+			else if(keyIn.right == true){
+				movementDirection = 'r';
+			}
+		
+			isCollision = false; 
+			gamePanel.collisionChecker.CollisionChecker(this); // pass this main character class into the collision checker method
+	
+			// if no collision, allow character to move
+			// passes through updated movementDirection variable from direction detector above
+			if(isCollision == false){
+
+				switch(movementDirection){
+					case 'u':
+						yPt -= sp;
+						break;
+					case 'l':
+						xPt -= sp;
+						break;
+					case 'd':
+						yPt += sp;
+						break;
+					case 'r':
+						xPt += sp;
+						break;
+				}
+			}
+
 		}
-
-
+		
         // if movement is called more than 12 times, change true -> false OR false -> true
-        if(spriteLooper > 12) {
-        	if(spriteDisplay) {
-        		spriteDisplay = false;
-        	}
-        	else {
-        		spriteDisplay = true;
-        	}
-        	
-        	// reset the counter
-        	spriteLooper = 0;
-        }
-        
+		if(spriteLooper > 12) {
+			if(spriteDisplay) {
+				spriteDisplay = false;
+			}
+			else {
+				spriteDisplay = true;
+			}
+				
+			// reset the counter
+			spriteLooper = 0;
+		}
     }
 
     
