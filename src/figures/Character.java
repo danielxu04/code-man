@@ -87,7 +87,10 @@ public class Character extends Figure{
             xPt += sp;
         }
         
-        
+		isCollision = false;
+		gamePanel.collisionChecker.CollisionChecker(this); // pass this main character class into the collision checker method
+
+
         // if movement is called more than 12 times, change true -> false OR false -> true
         if(spriteLooper > 12) {
         	if(spriteDisplay) {

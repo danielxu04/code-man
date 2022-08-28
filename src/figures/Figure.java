@@ -1,6 +1,7 @@
 package figures;
 
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 
 
 // parent class for all figures
@@ -27,4 +28,7 @@ public class Figure {
     public BufferedImage r2;
     
     public char movementDirection; // use characters 'u, l, d, r' to signify 'up, left, down, right'
+
+    public Rectangle solidRegion;
+    public boolean isCollision;
 }

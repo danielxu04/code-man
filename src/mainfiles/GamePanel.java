@@ -55,8 +55,9 @@ public class GamePanel extends JPanel implements Runnable{
     Thread thread;  // executed by a thread - start-stop functionality 
     KeyboardInput keyIn = new KeyboardInput(); // keyboard input object
     public Character mainCharacter = new Character(this, keyIn); // instantiate Character, parameters are this gamePanel object and keyIn KeyboardInput object
-    GameTileController controller = new GameTileController(this); // instantiate GameTileController, parameter is this gamePanel object - will draw the gameTiles
-    Text fps = new Text(fpsDisplay, 20, 30);
+    public GameTileController controller = new GameTileController(this); // instantiate GameTileController, parameter is this gamePanel object - will draw the gameTiles
+    public Text fps = new Text(fpsDisplay, 20, 30);
+    public Collision collisionChecker = new Collision(this); // pass gamePanel through the collision class
     
     /*************** GAME PANEL CONSTRUCTOR *****************/ 
 
