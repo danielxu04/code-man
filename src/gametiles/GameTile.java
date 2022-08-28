@@ -6,4 +6,7 @@ public class GameTile {
 
 	// instantiate buffered image for tile images
 	public BufferedImage tileImage;
+
+	// collision status
+	public boolean tileCollision;
 }

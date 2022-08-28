@@ -5,6 +5,7 @@ import mainfiles.KeyboardInput;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -29,6 +30,9 @@ public class Character extends Figure{
         this.xPt = 480;
         this.yPt = 144;
         this.sp = 4;
+		// solid region for main character
+		// cant be full tilesize or else it would be painful to navigate through tight spaces
+		this.solidRegion = new Rectangle(9, 18, 30, 30);
 
 		// display player in center of the screen
 		this.playerPosX = gamePanel.screenX / 2 - gamePanel.tileDimension/2;
