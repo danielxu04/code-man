@@ -2,7 +2,7 @@ package mainfiles;
 
 import figures.Figure;
 
-public class Collision {
+public class Collision { 
 
     // instantiate gamePanel
     GamePanel gamePanel;
@@ -59,8 +59,8 @@ public class Collision {
                 } // if false, we can just leave isCollision how it is - false
                 break;
             case 'l':
-                 // update topRow to 'add speed' so that figure does not move anymore
-                 leftColumn = divideByTileDimension((leftX + fig.sp));
+                 // update topRow to subtract speed so that figure does not move anymore
+                 leftColumn = divideByTileDimension((leftX - fig.sp));
                  // check top left corner
                  tileA = gamePanel.controller.mapMatrix[leftColumn][topRow];
                  // check bottom left corner
@@ -83,8 +83,8 @@ public class Collision {
                 } // if false, we can just leave isCollision how it is - false       
                 break;
             case 'r':
-                // update topRow to subtract speed so that figure does not move anymore
-                rightColumn = divideByTileDimension((rightX - fig.sp));
+                // update topRow to 'add speed' so that figure does not move anymore
+                rightColumn = divideByTileDimension((rightX + fig.sp));
                 // check top right corner
                 tileA = gamePanel.controller.mapMatrix[rightColumn][topRow];
                 // check bottom right corner
