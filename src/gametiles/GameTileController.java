@@ -67,6 +67,7 @@ public class GameTileController {
 			tileList.add(new GameTile());
 			tileList.add(new GameTile());
 			tileList.add(new GameTile());
+			tileList.add(new GameTile());
 			
 			
 			// FLOOR TILE			
@@ -92,6 +93,10 @@ public class GameTileController {
 			// BUSH TILE
 			tileList.get(5).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Bush.png"));
 			tileList.get(5).tileCollision = false;
+
+			// HOLE TILE
+			tileList.get(6).tileImage = ImageIO.read(getClass().getResourceAsStream("/world/Floor-Hole.png"));
+			tileList.get(6).tileCollision = false;
 			
 		} catch(IOException e) {
 			e.printStackTrace();
