@@ -2,6 +2,7 @@ package mainfiles;
 
 import figures.Character;
 import gametiles.GameTileController;
+import item.Item;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +10,7 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D; // child of graphics
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable{
     
@@ -58,7 +60,9 @@ public class GamePanel extends JPanel implements Runnable{
     public GameTileController controller = new GameTileController(this); // instantiate GameTileController, parameter is this gamePanel object - will draw the gameTiles
     public Text fps = new Text(fpsDisplay, 20, 30);
     public Collision collisionChecker = new Collision(this); // pass gamePanel through the collision class
-    
+    public Item itemsDisplayed[] = new Item[15]; // number of items displayed
+    public ObjectPlacer objectPlacer = new ObjectPlacer(this);
+
     /*************** GAME PANEL CONSTRUCTOR *****************/ 
 
     public GamePanel(){
