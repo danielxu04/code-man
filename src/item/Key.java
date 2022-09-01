@@ -10,7 +10,6 @@ public class Key extends Item{
         // Read the 'Key' image
         itemImg = imageReader("/objects/Key.png");
 
-        
 
     }
 }

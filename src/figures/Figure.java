@@ -29,6 +29,9 @@ public class Figure {
     
     public char movementDirection; // use characters 'u, l, d, r' to signify 'up, left, down, right'
 
+    // the solid region of figure sprite - we dont want the entire tile to be solid
     public Rectangle solidRegion;
+
+    // boolean storing if a collision has occured
     public boolean isCollision;
 }
