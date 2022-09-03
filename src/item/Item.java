@@ -19,7 +19,7 @@ public class Item {
 
 	public boolean isCollision; // if sprite collides with item
 
-
+ 
 	// method to read an image
 	public BufferedImage imageReader(String filePath){
 		try{
@@ -30,7 +30,7 @@ public class Item {
 
 		return tempImage;
 	}
-
+	
 	// method to draw items/objects onto screen
 	public void drawObjects(Graphics2D g2D, GamePanel gamePanel){
 

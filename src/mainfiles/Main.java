@@ -28,6 +28,8 @@ public class Main {
 
         gameWindow.setLocationRelativeTo(null); // center window
 
+        gamePanel.priorToGame();
+
         // start the gameloop
         gamePanel.threadStart();
 
