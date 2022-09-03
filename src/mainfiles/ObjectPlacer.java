@@ -7,11 +7,12 @@ public class ObjectPlacer {
     
     GamePanel gamePanel;
 
-    int tileDimension = gamePanel.tileDimension;
+    int tileDimension;
 
     public ObjectPlacer(GamePanel gamePanel){
 
         this.gamePanel = gamePanel;
+        this.tileDimension = gamePanel.tileDimension;
     }
 
 
@@ -28,10 +29,12 @@ public class ObjectPlacer {
         gamePanel.itemsDisplayed[1].xPt = 9*tileDimension;
         gamePanel.itemsDisplayed[1].yPt = 14*tileDimension;
 
+        // create new door object
         gamePanel.itemsDisplayed[2] = new Door();
         gamePanel.itemsDisplayed[2].xPt = 10*tileDimension;
         gamePanel.itemsDisplayed[2].yPt = 14*tileDimension;
 
+        // create new door object
         gamePanel.itemsDisplayed[3] = new Door();
         gamePanel.itemsDisplayed[3].xPt = 11*tileDimension;
         gamePanel.itemsDisplayed[3].yPt = 14*tileDimension;
