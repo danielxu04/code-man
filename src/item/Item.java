@@ -20,7 +20,8 @@ public class Item {
 	public boolean isCollision; // if sprite collides with item
 
 	public Rectangle solidRegion = new Rectangle(0, 0, 48, 48);
-
+	public int objectX = solidRegion.x;
+	public int objectY = solidRegion.y;
  
 	// method to read an image
 	public BufferedImage imageReader(String filePath){
