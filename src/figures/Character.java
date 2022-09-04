@@ -33,6 +33,9 @@ public class Character extends Figure{
 		// solid region for main character
 		// cant be full tilesize or else it would be painful to navigate through tight spaces
 		this.solidRegion = new Rectangle(9, 18, 30, 30);
+		// mutable solid region coordindate variables
+		this.solidX = solidRegion.x;
+		this.solidY = solidRegion.y;
 
 		// display player in center of the screen
 		this.playerPosX = gamePanel.screenX / 2 - gamePanel.tileDimension/2;

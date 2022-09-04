@@ -32,6 +32,9 @@ public class Figure {
     // the solid region of figure sprite - we dont want the entire tile to be solid
     public Rectangle solidRegion;
 
+    public int solidX;
+    public int solidY;
+
     // boolean storing if a collision has occured
     public boolean isCollision;
 }
