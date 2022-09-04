@@ -92,6 +92,8 @@ public class Character extends Figure{
 		
 			isCollision = false; 
 			gamePanel.collisionChecker.CollisionChecker(this); // pass this main character class into the collision checker method
+
+			int collisionedObjectIndex = gamePanel.collisionChecker.objectCollisionChecker(this, true); // checks collision between main character and objects
 	
 			// if no collision, allow character to move
 			// passes through updated movementDirection variable from direction detector above
@@ -129,6 +131,13 @@ public class Character extends Figure{
 		}
     }
 
+	public void pickUp(int index){
+
+		if(index > gamePanel.itemsDisplayed.length){
+			
+		}
+
+	}
     
     // draws our character 
     public void display(Graphics2D g2D){

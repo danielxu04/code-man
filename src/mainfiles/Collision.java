@@ -96,9 +96,11 @@ public class Collision {
                 break;
         }
     }
-    
+
     
     public int objectCollisionChecker(Figure fig, boolean isPlayer){
+
+        int j = 0;
 
         // loop through object/item array
         for(int i = 0; i < gamePanel.itemsDisplayed.length; i++){
@@ -113,29 +115,77 @@ public class Collision {
                 fig.solidRegion.x += fig.xPt;
                 fig.solidRegion.y += fig.yPt;
 
+                // movement checker - updates solidRegion coordinates
                 switch(fig.movementDirection){
                     case 'u':
                         fig.solidRegion.y -= fig.sp;
+                        // if figure's solidRegion intersects item's solid region
+                        if(fig.solidRegion.intersects(gamePanel.itemsDisplayed[i].solidRegion)){
+                            if(gamePanel.itemsDisplayed[i].isCollision){
+                                // if item is solid, change isCollision of the figure to true - figure collides with item
+                                fig.isCollision = true;
+                            }
+                            if(isPlayer){
+                                // if the figure is a player, return index of collided item
+                                j = i;
+                            }
+                        }
                         break;
 
                     case 'l':
                         fig.solidRegion.x -= fig.sp;
+                        // if figure's solidRegion intersects item's solid region
+                        if(fig.solidRegion.intersects(gamePanel.itemsDisplayed[i].solidRegion)){
+                            if(gamePanel.itemsDisplayed[i].isCollision){
+                                // if item is solid, change isCollision of the figure to true - figure collides with item
+                                fig.isCollision = true;
+                            }
+                            if(isPlayer){
+                                // if the figure is a player, return index of collided item
+                                j = i;
+                            }
+                        }
                         break;
 
                     case 'd':
                         fig.solidRegion.y += fig.sp;
+                        // if figure's solidRegion intersects item's solid region
+                        if(fig.solidRegion.intersects(gamePanel.itemsDisplayed[i].solidRegion)){
+                            if(gamePanel.itemsDisplayed[i].isCollision){
+                                // if item is solid, change isCollision of the figure to true - figure collides with item
+                                fig.isCollision = true;
+                            }
+                            if(isPlayer){
+                                // if the figure is a player, return index of collided item
+                                j = i;
+                            }
+                        }
                         break;
 
                     case 'r':
                         fig.solidRegion.x += fig.sp;
+                        // if figure's solidRegion intersects item's solid region
+                        if(fig.solidRegion.intersects(gamePanel.itemsDisplayed[i].solidRegion)){
+                            if(gamePanel.itemsDisplayed[i].isCollision){
+                                // if item is solid, change isCollision of the figure to true - figure collides with item
+                                fig.isCollision = true;
+                            }
+                            if(isPlayer){
+                                // if the figure is a player, return index of collided item
+                                j = i;
+                            }
+                        }
                         break;
-                }   
+                }
 
+                fig.solidRegion.y = fig.solidY;
+                fig.solidRegion.x = fig.solidX;
+                gamePanel.itemsDisplayed[i].solidRegion.x = gamePanel.itemsDisplayed[i].objectX;
+                gamePanel.itemsDisplayed[i].solidRegion.y = gamePanel.itemsDisplayed[i].objectY;
+                
             }
-            
-            
-
         }
+        return j;
     }
 }
 
