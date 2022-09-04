@@ -176,15 +176,15 @@ public class Collision {
                             }
                         }
                         break;
-                }
+                    }    
 
-                fig.solidRegion.y = fig.solidY;
-                fig.solidRegion.x = fig.solidX;
-                gamePanel.itemsDisplayed[i].solidRegion.x = gamePanel.itemsDisplayed[i].objectX;
-                gamePanel.itemsDisplayed[i].solidRegion.y = gamePanel.itemsDisplayed[i].objectY;
-                
+                    fig.solidRegion.y = fig.solidY;
+                    fig.solidRegion.x = fig.solidX;
+                    gamePanel.itemsDisplayed[i].solidRegion.x = gamePanel.itemsDisplayed[i].objectX;
+                    gamePanel.itemsDisplayed[i].solidRegion.y = gamePanel.itemsDisplayed[i].objectY;
+                }
             }
-        }
+        
         return j;
     }
 }

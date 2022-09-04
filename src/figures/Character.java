@@ -22,6 +22,9 @@ public class Character extends Figure{
 	public int playerPosX;
 	public int playerPosY;
 
+	// how many keys the player has
+	public int keyInventory = 0;
+
     // constructor for character
     public Character(GamePanel g, KeyboardInput k){
         this.gamePanel = g;
@@ -94,6 +97,7 @@ public class Character extends Figure{
 			gamePanel.collisionChecker.CollisionChecker(this); // pass this main character class into the collision checker method
 
 			int collisionedObjectIndex = gamePanel.collisionChecker.objectCollisionChecker(this, true); // checks collision between main character and objects
+			pickUp(collisionedObjectIndex);
 	
 			// if no collision, allow character to move
 			// passes through updated movementDirection variable from direction detector above
@@ -132,12 +136,32 @@ public class Character extends Figure{
     }
 
 	public void pickUp(int index){
+		// if index is valid
+		if(index != gamePanel.itemsDisplayed.length + 3){
 
-		if(index > gamePanel.itemsDisplayed.length){
-			
+			// object name
+			String objName = gamePanel.itemsDisplayed[index].itemName;
+
+			// switch objectName
+			switch(objName){
+				case "Key":
+					// collected key, increment keyAmt
+					keyInventory++;
+					// remove key from the world
+					gamePanel.itemsDisplayed[index] = null;
+					break;
+				case "Door":
+					// if player has more than one key, consume the key and erase the door object
+					if(keyInventory >= 1){
+						keyInventory--;
+						gamePanel.itemsDisplayed[index] = null;
+					}
+					break;
+			}
 		}
 
 	}
+
     
     // draws our character 
     public void display(Graphics2D g2D){
