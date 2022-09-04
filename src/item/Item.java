@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.awt.Graphics2D;
 import mainfiles.GamePanel;
-
+import java.awt.Rectangle;
 import javax.imageio.ImageIO;
 
 public class Item {
@@ -19,6 +19,8 @@ public class Item {
 
 	public boolean isCollision; // if sprite collides with item
 
+	public Rectangle solidRegion = new Rectangle(0, 0, 48, 48);
+
  
 	// method to read an image
 	public BufferedImage imageReader(String filePath){
@@ -30,7 +32,7 @@ public class Item {
 
 		return tempImage;
 	}
-	
+
 	// method to draw items/objects onto screen
 	public void drawObjects(Graphics2D g2D, GamePanel gamePanel){
 
