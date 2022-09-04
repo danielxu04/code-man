@@ -9,7 +9,7 @@ public class Key extends Item{
         itemName = "Key";
         // Read the 'Key' image
         itemImg = imageReader("/objects/Key.png");
-
+        isCollision = false;
 
 
 

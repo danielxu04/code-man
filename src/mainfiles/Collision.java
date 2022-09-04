@@ -95,9 +95,47 @@ public class Collision {
                 } // if false, we can just leave isCollision how it is - false
                 break;
         }
+    }
+    
+    
+    public int objectCollisionChecker(Figure fig, boolean isPlayer){
 
+        // loop through object/item array
+        for(int i = 0; i < gamePanel.itemsDisplayed.length; i++){
+            
+            // check if current item in array is not null
+            if(gamePanel.itemsDisplayed[i]  != null){
+                // object's solid pos
+                gamePanel.itemsDisplayed[i].solidRegion.x = gamePanel.itemsDisplayed[i].xPt;
+                gamePanel.itemsDisplayed[i].solidRegion.y = gamePanel.itemsDisplayed[i].yPt;
 
+                // figure solid pos
+                fig.solidRegion.x += fig.xPt;
+                fig.solidRegion.y += fig.yPt;
 
+                switch(fig.movementDirection){
+                    case 'u':
+                        fig.solidRegion.y -= fig.sp;
+                        break;
+
+                    case 'l':
+                        fig.solidRegion.x -= fig.sp;
+                        break;
+
+                    case 'd':
+                        fig.solidRegion.y += fig.sp;
+                        break;
+
+                    case 'r':
+                        fig.solidRegion.x += fig.sp;
+                        break;
+                }   
+
+            }
+            
+            
+
+        }
     }
 }
 
